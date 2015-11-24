@@ -64,12 +64,12 @@ public class Concentration {
     }
 
     public static void print ( Tile[][] a ) { 
-	String s = "==========ARRAY==========\n";
+	String s = "==========BOARD==========\n";
 	int c = 0;
 	for( Tile[] t: a ) {
 	    s += "Row " + c + ": [";	    
 	    for( Tile j: t ) {
-		s += j.getFace() + ","; 		
+		s += j + ","; 		
 	    }
 	    s = s.substring(0,s.length() - 1) + "]\n"; //cuts off the trailing comma	    
 	    c += 1;
@@ -79,8 +79,6 @@ public class Concentration {
     
     public void play() {
 		while (_numberFaceUp != 16) {
-			String tile1s;
-			String tile2s;
 			int tile1;
 			int tile2;
 			int tile1r;
@@ -89,14 +87,17 @@ public class Concentration {
 			int tile2c;
 			
 			//Prompts user for inputs
-			System.out.println("Input valid first tile to flip over (1-16): ");
-			tile1s = Keyboard.readString();
-			System.out.println("Input valid second tile to flip over (1-16): ");
-			tile2s = Keyboard.readString();
-			
-			//Parses inputs into integers
-			tile1 = Integer.parseInt(tile1s);
-			tile2 = Integer.parseInt(tile2s);
+			System.out.print("Input valid first tile to flip over (1-16): ");			
+			try {
+			    tile1 = Keyboard.readInt();
+		        }
+			catch( Exception e ) { tile1 = (int)(Math.random()*16); } 
+
+			System.out.print("Input valid second tile to flip over (1-16): ");
+			try {
+			    tile2 = Keyboard.readInt();
+			}
+			catch( Exception e ) { tile2 = (int)(Math.random()*16); }
 			
 			//Changes integers into tile coordinates
 			tile1r = (tile1 - 1) / 4;
@@ -107,23 +108,23 @@ public class Concentration {
 			//Flips over the two tiles
 			_board[tile1r][tile1c].flip();
 			_board[tile2r][tile2c].flip();
-			printA(_board);
+			print(_board);
 			
 			//Checks if they are the same
 			if (_board[tile1r][tile1c].equals(_board[tile2r][tile2c]) ) {
 				_numberFaceUp += 2;
 			}
 			else {
-				_board[tile1r][tile1c].flip();
-				_board[tile2r][tile2c].flip();
-				}
+			    _board[tile1r][tile1c].flip();
+			    _board[tile2r][tile2c].flip();			    
+			}
 		}
-	}
+    }
 	
     //DO NOT MODIFY main()
     public static void main(String[] args){
 	Concentration game = new Concentration();
-	print(_board);
+	print(game._board);
 	game.play();
     }
 	
