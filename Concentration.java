@@ -24,9 +24,11 @@ public class Concentration {
 	}
 	
 	//scrambling function -- still needs to be changed 
-	public void shuffle() {
-		for( int x = 0; x < _words.length ; x += 1){
-			swap( x , (int)(Math.random() * _words.length));
+	public void shuffle( Tile[][] t ) {
+		for (String[] s : t) {
+			for (String x : s) {
+				swap( x , t [(int)(Math.random() * t.length] [(int)(Math.random() * t[0].length)]));
+			}
 		}
 	}
 	private void swap( int i, int j ) {
