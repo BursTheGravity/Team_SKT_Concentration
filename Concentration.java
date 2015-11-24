@@ -63,7 +63,7 @@ public class Concentration {
 	j.setFace( temp1 );
     }
 
-    public static void printA( Tile[][] a ) { 
+    public static void print ( Tile[][] a ) { 
 	String s = "==========ARRAY==========\n";
 	int c = 0;
 	for( Tile[] t: a ) {
@@ -76,13 +76,55 @@ public class Concentration {
 	}
 	System.out.println(s);	
     }
+    
+    public void play() {
+		while (_numberFaceUp != 16) {
+			String tile1s;
+			String tile2s;
+			int tile1;
+			int tile2;
+			int tile1r;
+			int tile1c;
+			int tile2r;
+			int tile2c;
+			
+			//Prompts user for inputs
+			System.out.println("Input valid first tile to flip over (1-16): ");
+			tile1s = Keyboard.readString();
+			System.out.println("Input valid second tile to flip over (1-16): ");
+			tile2s = Keyboard.readString();
+			
+			//Parses inputs into integers
+			tile1 = Integer.parseInt(tile1s);
+			tile2 = Integer.parseInt(tile2s);
+			
+			//Changes integers into tile coordinates
+			tile1r = (tile1 - 1) / 4;
+			tile1c = (tile1 - 1) % 4;
+			tile2r = (tile2 - 1) / 4;
+			tile2c = (tile2 - 1) % 4;
+			
+			//Flips over the two tiles
+			_board[tile1r][tile1c].flip();
+			_board[tile2r][tile2c].flip();
+			printA(_board);
+			
+			//Checks if they are the same
+			if (_board[tile1r][tile1c].equals(_board[tile2r][tile2c]) ) {
+				_numberFaceUp += 2;
+			}
+			else {
+				_board[tile1r][tile1c].flip();
+				_board[tile2r][tile2c].flip();
+				}
+		}
+	}
 	
     //DO NOT MODIFY main()
     public static void main(String[] args){
 	Concentration game = new Concentration();
-	//game.play();
-	printA( game._board );
-    
+	print(_board);
+	game.play();
     }
 	
 }//end class Concentration
