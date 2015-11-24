@@ -17,29 +17,31 @@ public class Concentration {
 	//insert constructor and methods here
 	public Concentration() {
 		_words = {"marin","bengi","faker","easyhoon","scout","bang","wolf","kkoma"};
-		_board = {;
+		_board = //???;
+		_numberFaceUp = 0;
 			
 		}
-		
-		//scrambling function
-		public void shuffle() {
-			for( int x = 0; x < _words.length ; x += 1){
-				swap( x , (int)(Math.random() * _words.length));
-			}
-		}
-		private void swap( int i, int j ) {
-			String temp1 = _words[i];
-			String temp2 = _words[j];
-			_words[i] = temp2;
-			_words[j] = temp1;
-		}
-		
-		
-		//DO NOT MODIFY main()
-		public static void main(String[] args){
-			Concentration game = new Concentration();
-			game.play();
-		}
-		
-	}//end class Concentration
+	}
 	
+	//scrambling function -- still needs to be changed 
+	public void shuffle() {
+		for( int x = 0; x < _words.length ; x += 1){
+			swap( x , (int)(Math.random() * _words.length));
+		}
+	}
+	private void swap( int i, int j ) {
+		String temp1 = _words[i];
+		String temp2 = _words[j];
+		_words[i] = temp2;
+		_words[j] = temp1;
+	}
+	
+	
+	//DO NOT MODIFY main()
+	public static void main(String[] args){
+		Concentration game = new Concentration();
+		game.play();
+	}
+	
+}//end class Concentration
+
