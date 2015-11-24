@@ -88,11 +88,17 @@ public class Concentration {
 			
 			//Prompts user for inputs
 			System.out.print("Input valid first tile to flip over (1-16): ");			
-			tile1 = Keyboard.readInt();
-		        
+			try {
+			    tile1 = Keyboard.readInt();
+		        }
+			catch( Exception e ) { tile1 = (int)(Math.random()*16); } 
+
 			System.out.print("Input valid second tile to flip over (1-16): ");
-			tile2 = Keyboard.readInt();
-			    
+			try {
+			    tile2 = Keyboard.readInt();
+			}
+			catch( Exception e ) { tile2 = (int)(Math.random()*16); }
+			
 			//Changes integers into tile coordinates
 			tile1r = (tile1 - 1) / 4;
 			tile1c = (tile1 - 1) % 4;

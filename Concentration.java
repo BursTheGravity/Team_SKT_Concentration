@@ -119,6 +119,10 @@ public class Concentration {
 			    _board[tile2r][tile2c].flip();			    
 			}
 		}
+
+		System.out.println("Congratulations, you won!\n");
+		System.out.println("Game functionality provided by Team_SKT_Concentration: ");
+		System.out.println("Leo Au-Yeung & Sungbin Kim\n");
     }
 	
     //DO NOT MODIFY main()
