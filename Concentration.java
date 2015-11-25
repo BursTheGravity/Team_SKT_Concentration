@@ -122,7 +122,7 @@ public class Concentration {
 			int tile2c = -1;
 			
 			//Prompts user for inputs
-			while (tile1 == tile2 || tile1 == 0 || tile2 == 0 || _board[tile1r][tile1c].isFaceUp() || _board[tile2r][tile2c].isFaceUp()) {
+			while (tile1 == tile2 || tile1 <= 0 || tile2 <= 0 || _board[tile1r][tile1c].isFaceUp() || _board[tile2r][tile2c].isFaceUp()) {
 				tile1 = prompt1();
 				tile2 = prompt2();
 				
