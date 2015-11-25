@@ -3,8 +3,6 @@
 //HW36 -- Some Folks Call It a Memory
 //2015-11-23
 
-//Not getting home til ~8ish - Leo (11/24)
-
 import cs1.Keyboard;  //if comfortable with Scanner, you may comment this out
 
 public class Concentration {
@@ -79,53 +77,71 @@ public class Concentration {
 	System.out.println(s);	
     }
     
-    public void play() {
+    public int prompt1() {
+		int tile;
+		System.out.print("Input valid first tile to flip over (1-16): ");
+		tile = Keyboard.readInt();
+		return tile;
+	}
+	public int prompt2() {
+		int tile;
+		System.out.print("Input valid second tile to flip over (1-16): ");
+		tile = Keyboard.readInt();
+		return tile;
+	}
+		
+	public void play() {
+		print(_board);
 		while (_numberFaceUp != 16) {
-			int tile1;
-			int tile2;
-			int tile1r;
-			int tile1c;
-			int tile2r;
-			int tile2c;
+			int tile1 = -1;
+			int tile2 = -1;
+			int tile1r = -1;
+			int tile1c = -1;
+			int tile2r = -1;
+			int tile2c = -1;
 			
-			//Prompts user for inputs
-			System.out.print("Input valid first tile to flip over (1-16): ");			
-			try {
-			    tile1 = Keyboard.readInt();
-		        }
-			catch( Exception e ) { tile1 = (int)(Math.random()*16); } 
-
-			System.out.print("Input valid second tile to flip over (1-16): ");
-			try {
-			    tile2 = Keyboard.readInt();
+			//Checks to see if user picked same tiles or tiles that have already been flipped
+			while (tile1 == tile2 || _board[tile1r][tile1c].isFaceUp() || _board[tile2r][tile2c].isFaceUp()) {
+				//Prompts user for inputs
+				tile1 = prompt1();
+				tile2 = prompt2();
+				
+				//Changes integers into tile coordinates
+				tile1r = (tile1 - 1) / 4;
+				tile1c = (tile1 - 1) % 4;
+				tile2r = (tile2 - 1) / 4;
+				tile2c = (tile2 - 1) % 4;
+				
+				//Displays error messages depending on error(s)
+				if (tile1 == tile2) {
+					System.out.println("You cannot pick the same tile! Try again.\n");
+				}
+				if (_board[tile1r][tile1c].isFaceUp()) {
+					System.out.println("Tile 1 is already face up! Try again.\n");
+				}
+				if (_board[tile2r][tile2c].isFaceUp()) {
+					System.out.println("Tile 2 is already face up! Try again.\n");
+				}
 			}
-			catch( Exception e ) { tile2 = (int)(Math.random()*16); }
 			
-			//Changes integers into tile coordinates
-			tile1r = (tile1 - 1) / 4;
-			tile1c = (tile1 - 1) % 4;
-			tile2r = (tile2 - 1) / 4;
-			tile2c = (tile2 - 1) % 4;
-			
-			//Flips over the two tiles
+			//If no errors, flips over the two tiles & prints the new board
 			_board[tile1r][tile1c].flip();
 			_board[tile2r][tile2c].flip();
 			print(_board);
 			
-			//Checks if they are the same
+			//Checks if the tiles are the same
 			if (_board[tile1r][tile1c].equals(_board[tile2r][tile2c]) ) {
 				_numberFaceUp += 2;
 			}
 			else {
 			    _board[tile1r][tile1c].flip();
-			    _board[tile2r][tile2c].flip();			    
+			    _board[tile2r][tile2c].flip();
 			}
 		}
-
 		System.out.println("Congratulations, you won!\n");
 		System.out.println("Game functionality provided by Team_SKT_Concentration: ");
-		System.out.println("Leo Au-Yeung & Sungbin Kim\n");
-    }
+		System.out.println("Leo Au-Yeung & Sungbin Kim & Yanlin Ma\n");
+	}
 	
     //DO NOT MODIFY main()
     public static void main(String[] args){
